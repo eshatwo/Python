@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Trip Buddy</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        padding: 10px;
+    }
+
+    body {
+        background-color: rgba(228, 222, 222, 0.466);
+        font-family: garamond;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class='container'>
+        <div class='row'>
+            <h2>You have successfully logged in, {{ request.session.name }}</h2>
+            <p>Here at Handy Helper, you will be able to create, view, and join jobs.</p>
+            <!-- <p class='text-danger'>WARNING: <span class='text-dark'>If you delete a trip, you will not be able to access it again.</span></p> -->
+            <a class='btn' href='/add'>Add A Job</a>
+            <a class='btn' href='/logout'>Logout</a>
+        </div>
+        <div class='row'>
+            <h4>Current Jobs Available</h4>
+            <table class='table table-bordered table-hovered'>
+                <tr>
+                    <th>Job</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                {% if all_jobs %} {% for job in all_jobs %} 
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.location }}</td>
+                    <td><a href='/job/{{job.id}}'>View</a> <a href='/join/{{job.id}}'>Add</a> 
+                        {% if user.id == job.creator.id %}
+                        <a href='/edit/{{job.id}}'>Edit</a> <a href='/delete/{{job.id}}'>Cancel</a>
+                        {% endif %} 
+                    </td>
+                </tr>
+                {% endfor %} {% endif %}
+            </table>
+            <h4>My Jobs</h4>
+            <table class='table table-bordered table-hovered'>
+                <tr>
+                    <th>Job</th>
+                    <th>Action</th>
+                </tr>
+                {% if jobs %} {% for job in jobs %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td><a href='/job/{{job.id}}'>View</a> <a href='/delete/{{job.id}}'>Done</a></td>
+                </tr>
+                {% endfor %} {% endif %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

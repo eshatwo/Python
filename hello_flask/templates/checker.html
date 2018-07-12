@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Checkerboard</title>
+        <style>
+            .color1 {
+                background-color: black;
+            }
+
+            .color2 {
+                background-color: red
+            }
+
+            table tr td {
+                height: 200px;
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+        {% for i in range(0, row): %}
+            <tr>
+                {% for x in range(0, column): %}
+                <td class='color{{ (i+x)%2+1 }}'></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>   
+    </body>
+</html>

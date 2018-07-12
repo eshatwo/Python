@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Trip Buddy</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    body {
+        background-color: rgba(228, 222, 222, 0.466);
+        font-family: garamond;
+    }
+
+    #timeline {
+        display: inline-block;
+    }
+    #add {
+        display: inline-block;
+    }
+
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='row' id='timeline'>
+            <div class='col' id='add'> 
+                <h4>Add a Quote!</h4>
+                <a href='/welcome'>Back</a>
+                <a href='/'>Logout</a>
+                <form action='/adding' method='post'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="author">Author:</label>
+                        <input type="text" class="form-control" name='author' placeholder="Author">
+                            {% if messages %} {% for message in messages %} {% if 'author_len' in message.tags %}
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ message }}
+                            </div>
+                            {% endif %} {% endfor %} {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Quote:</label>
+                        <input type="text" class="form-control" name='content' placeholder="Quote">
+                            {% if messages %} {% for message in messages %} {% if 'quote_len' in message.tags %}
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ message }}
+                            </div>
+                            {% endif %} {% endfor %} {% endif %}
+                    </div>
+                    <input type='submit' class='btn btm-primary' value='Submit'>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</body>

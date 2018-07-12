@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Add a Trip</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        padding: 10px;
+    }
+
+    body {
+        background-color: rgba(228, 222, 222, 0.466);
+        font-family: garamond;
+    }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='row'>
+            <h2>Edit Profile</h2>
+            <a href='/welcome'>Back</a>
+            <a href='/'>Logout</a>
+        </div>
+        <div class='row'>
+            <form action='/update/{{user.id}}' method='post'>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" class="form-control" name='first_name' value='{{ user_to_edit.first_name }}'>
+                        {% if messages %} {% for message in messages %} {% if 'first_name_len' in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                        </div>
+                        {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" name='last_name' value='{{ user_to_edit.last_name }}'>
+                        {% if messages %} {% for message in messages %} {% if 'last_name_len' in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                        </div>
+                        {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" name='email' value='{{ job.location }}'>
+                        {% if messages %} {% for message in messages %} {% if 'email_len' in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                        </div>
+                        {% endif %} {% if 'email_valid' in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                        </div>
+                        {% endif %} {% if 'email_taken' in message.tags %}
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                        </div>
+                        {% endif %} {% endfor %} {% endif %}
+                </div>
+                <input type='submit' name='update' class='btn btm-primary' value='Submit'>
+            </form>
+        </div>
+    </div>
+</body>

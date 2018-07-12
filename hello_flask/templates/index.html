@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <head>
+      <title>My First Template</title>
+    </head>
+    <body>
+        <h1>Random Numbers</h1>
+        {% for number in random_numbers %}
+            <p>{{ number }}</p>
+        {% endfor %}
+        <h1>Students</h1>
+        {% for student in students %}
+            <p>{{ student['name'] }} - {{ student['age'] }}</p>
+        {% endfor %}
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ninja Gold</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }} "></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Disney Gold</h1>
+        <div class="row">
+            <h3>Your Gold: {{ gold }} </h3>
+        </div>
+        <div class="places row">
+            <div class="justify-content-center col-md-3">
+                <form action="/process_money" method="POST">
+                    <h4>Farm</h4>
+                    <img src="../static/img/barn.jpg" alt="gold" height="250px" width="280px">
+                    <p>(earns 10-20 gold)</p>
+                    <input name="farm" type="hidden" value="10">
+                    <button type="submit" class="btn btn-primary">Find Gold!</button>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <form action="/process_money" method="POST">
+                    <h4>Cave</h4>
+                    <img src="../static/img/cave.jpg" alt="cave" height="250px" width="280px">
+                    <p>(earns 5-10 gold)</p>
+                    <input name="cave" type="hidden" value="10">
+                    <button type="submit " class="btn btn-primary ">Find Gold!</button>
+                </form>
+            </div>
+            <div class="col-md-3 ">
+                <form action="/process_money " method="POST">
+                    <h4>House</h4>
+                    <img src="../static/img/house.jpg" height="250px" width="280px" alt="house">
+                    <p>(earns 2-5 gold)</p>
+                    <input name="house" type="hidden" value="10">
+                    <button type="submit " class="btn btn-primary ">Find Gold!</button>
+                </form>
+            </div>
+            <div class="col-md-3 ">
+                <form action="/process_money " method="POST">
+                    <h4>Casino</h4>
+                    <img src="../static/img/casino.jpg" height="250px " width="280px " alt="casino">
+                    <p>(earns/takes 0-50 gold)</p>
+                    <input name="casino" type="hidden" value="10 ">
+                    <button type="submit" class="btn btn-primary ">Find Gold!</button>
+                </form>
+            </div>
+        </div>
+        <div class="activities row ">
+            <p1>Activities</p1>
+        </div>
+            <div class="row">
+                <form action="/clear"><button type="submit" class="btn btn-primary">Reset Game!</button>
+                </form>
+            </div>
+            <div id="activities" class="col-md-12">
+                {% for i in range(activities|length) %} {{ activities[i]|safe }} {% endfor %}
+            </div>
+</div>
+</body>
+
+</html>

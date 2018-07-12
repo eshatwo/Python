@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Job</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    body {
+        background-color: rgba(228, 222, 222, 0.466);
+        font-family: garamond;
+    }
+
+    h6 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size:40px;
+    }
+
+    .row {
+        padding: 10px;
+    }
+    </style>
+    
+</head>
+<body>
+    <div class='container border'>
+        <div class='row'> 
+            <h2>{{ title }}</h2>
+            <a href='/welcome'>Back</a>
+            <a href='/'>Logout</a>
+            <br>
+            <h6><b>Posted By:</b> {{ creator.first_name }} {{ creator.last_name }}</h6>
+            <h6><b>Description:</b> {{ description }}</h6>
+            <h6><b>Location:</b> {{ location }}</h6>
+        </div>
+        <div class='row'>
+            <a href='/add'>Add A Job</a>
+        </div>
+    </div>
+    
+</body>
+</html>

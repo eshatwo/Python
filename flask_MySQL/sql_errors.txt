@@ -1,0 +1,14 @@
+OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+fix: put in the correct password
+
+ImportError: cannot import name 'connectToMySQL'
+fix: the function of connecting to mysql at the end is not attached to the class (indentation error)
+
+IndentationError: expected an indented block
+fix: properly indent
+
+AttributeError: 'MySQLConnection' object has no attribute 'query_db'
+fix: make the function a method of the class
+
+NameError: name 'Nonecopy' is not defined
+fix: data type has to be ‘none’

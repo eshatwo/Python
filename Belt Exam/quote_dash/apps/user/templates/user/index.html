@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Quote Dash</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    body {
+        width: 100%;
+        height: 100%;
+        font-family: garamond;
+        background-color:rgb(202, 177, 226);
+        background-position: center;
+        background-size: cover;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #register {
+        width:300px;
+        height:100px;
+        display: inline-block;
+    }
+
+    #login {
+        width:300px;
+        height:100px;
+        display: inline-block;
+        margin-left: 900px;
+        margin-top: -800px;
+    }
+
+    h1 {
+        padding: 20px;
+        font-size: 100px;
+    }
+
+    h3{
+        font-size: 40px;
+    }
+    label {
+        font-size: 20px;
+    }
+    </style>
+
+</head>
+
+<body>
+    <h1 class=''>Welcome to Quote Dash!</h1>
+    <div class='container'>
+        <div id='register' class="row">
+            <h3>Register</h3>
+            <form action='/register' method='post'>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" class="form-control" name='first_name' id="first_name" aria-describedby="first_name" placeholder="Enter first name">
+                    {% if messages %} {% for message in messages %} {% if 'first_name_len' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'first_name_valid' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" class="form-control" name='last_name' id="last_name" aria-describedby="last_name" placeholder="Enter last name">
+                    {% if messages %} {% for message in messages %} {% if 'last_name_len' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'last_name_valid' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" name='email' id="email" aria-describedby="email" placeholder="Enter email">
+                    {% if messages %} {% for message in messages %} {% if 'email_len' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'email_valid' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'email_taken' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name='password' class="form-control" id="password" aria-describedby="password" placeholder="Enter password (must be at least 8 characters)">
+                    {% if messages %} {% for message in messages %} {% if 'password_len' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="password">Confirm Password:</label>
+                    <input type="password" name='pw_confirm' class="form-control" id="pw_confirm" aria-describedby="pw_confirm" placeholder="Confirm password">
+                    {% if messages %} {% for message in messages %} {% if 'not_confirm' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% endfor %} {% endif %}
+                </div>
+                <input type='submit' class='btn btm-primary' value='Register'>
+            </form>
+        </div>
+        <div id='login' class='row'>
+            <h3>Login</h3>
+            <form action='/login' method='post'>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name='email' class="form-control" id="email" aria-describedby="email" placeholder="Enter email">
+                    {% if messages %} {% for message in messages %} {% if 'no_email' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'email_not_valid' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'email_dne' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% endfor %} {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name='password' class="form-control" id="password" aria-describedby="password" placeholder="Enter password (must be at least 8 characters)">
+                    {% if messages %} {% for message in messages %} {% if 'no_pass' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'short_pass' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% if 'incorrect_pass' in message.tags %}
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endif %} {% endfor %} {% endif %}
+                </div>
+                <input type='submit' class='btn btm-primary' value='Login'>
+            </form>
+        </div>
+    </div>
+</body>
+
+</body>
+</html>

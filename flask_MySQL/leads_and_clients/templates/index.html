@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rick And Morty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/main.css') }}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+    window.onload = function() {
+
+    var chart = {
+        animationEnabled: true,
+        title: {
+            text: "Leads and Clients"
+        },
+        data: [{
+            type: "pie",
+            startAngle: 40,
+            toolTipContent: "{label} {y}",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabelFontSize: 16,
+            indexLabel: "{label} {y}",
+            dataPoints: [
+                {% for i in clients %}
+                { y: {{ i['name'] }}, label: '{{ i['leads'] }}' },
+                {% endfor %}
+            ]
+        }]
+    };
+
+    $("#chartContainer").CanvasJSChart(options);
+
+    }
+    </script>
+</head>
+
+<body>
+        <div class="container">
+                <h2>List of all customers and # of leads:</h2>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Customer Name</th>
+                                    <th>Number of Leads</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in clients %}
+                                <tr>
+                                    <td>{{i['name']}}</td>
+                                    <td>{{i['leads']}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Customers and number of new leads</h2>
+                                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                                <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+                                <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+                            </div>
+                        </div>
+                </div>
+        </div>           
+</body>
+</html> 
